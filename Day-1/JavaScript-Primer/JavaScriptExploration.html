@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript Exploration</title>
+	<style>
+	.pass{
+		color : green;
+	}
+	.fail{
+		color : red;
+		text-decoration: line-through;
+		font-style: italic;
+	}
+	</style>
+	<script>
+	function test(title,caseFn){
+		var testItem = document.createElement("li");
+		testItem.innerHTML = title;
+		var result = caseFn();
+		testItem.classList.add(result ? "pass" : "fail");
+		document.getElementById("ulTestList").appendChild(testItem);
+	}
+	function sum(x,y){
+		return x + y;
+	}
+	window.addEventListener("DOMContentLoaded",init);
+	function init(){
+		test("Should add two numbers",function(){
+			//Arrange
+			var number1 = 10, number2 = 20;
+			
+			//Act
+			var result = sum(number1, number2);
+
+			//Assert
+			return result === 30;
+		});	
+	}
+	</script>
+</head>
+<body>
+	<h1>JavaScript</h1>
+	<hr>
+	<ul id="ulTestList"></ul>
+</body>
+</html>
