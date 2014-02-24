@@ -13,6 +13,7 @@
 		font-style: italic;
 	}
 	</style>
+	<script src="calculator.js"></script>
 	<script>
 	function test(title,caseFn){
 		var testItem = document.createElement("li");
@@ -21,9 +22,7 @@
 		testItem.classList.add(result ? "pass" : "fail");
 		document.getElementById("ulTestList").appendChild(testItem);
 	}
-	function sum(x,y){
-		return x + y;
-	}
+	
 	window.addEventListener("DOMContentLoaded",init);
 	function init(){
 		test("Should add two numbers",function(){
@@ -36,6 +35,93 @@
 			//Assert
 			return result === 30;
 		});	
+	}
+	function init(){
+		test("Should add two numbers",function(){
+			//Arrange
+			var number1 = 10, number2 = 20;
+			
+			//Act
+			var result = sum(number1, number2);
+
+			//Assert
+			return result === 30;
+		});
+		test("Should add two numbers in string format",function(){
+			//Arrange
+			var number1 = "10", number2 = "20";
+			
+			//Act
+			var result = sum(number1, number2);
+
+			//Assert
+			return result === 30;
+		});	
+		test("Should add two functions return numbers",function(){
+			//Arrange
+			var f1 = function(){ return 10;};
+			var f2 = function(){ return 20;};
+			
+			//Act
+			var result = sum(f1,f2);
+
+			//Assert
+			return result === 30;
+		});	
+		test("Should add two functions return numbers in string format",function(){
+				//Arrange
+				var f1 = function(){ return "10";};
+				var f2 = function(){ return "20";};
+				
+				//Act
+				var result = sum(f1,f2);
+
+				//Assert
+				return result === 30;
+		});	
+		
+		test("Should add two functions return functions returning numbers in string format",function(){
+			//Arrange
+			var f1 = function(){return function(){ return "10";}};
+			var f2 = function(){return function(){ return "20";}};
+			
+			//Act
+			var result = sum(f1,f2);
+
+			//Assert
+			return result === 30;
+		});
+		test("Should add 1 number",function(){
+			//Arrange
+			var n1 = 10;
+			
+			//Act
+			var result = sum(n1);
+
+			//Assert
+			return result === 10;
+		});
+		test("Should add more than 2 numbers",function(){
+			//Arrange
+			var n1 = 10;
+			
+			//Act
+			var result = sum(10,20,30,40);
+
+			//Assert
+			return result === 100;
+		});
+		test("Should add an array of numbers",function(){
+			//Arrange
+			var numbers = [10,20,30,40];
+			
+			//Act
+			var result = sum(numbers);
+
+			//Assert
+			return result === 100;
+		});			
+
 	}
 	</script>
 </head>
