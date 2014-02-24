@@ -120,7 +120,18 @@
 
 			//Assert
 			return result === 100;
-		});			
+		});
+		test("Should add an array of array of numbers",function(){
+			//Arrange
+			var numbers = [10,[20,[30,[40]]]];
+			
+			//Act
+			var result = sum(numbers);
+
+			//Assert
+			return result === 100;
+		});	
+
 
 	}
 	</script>
