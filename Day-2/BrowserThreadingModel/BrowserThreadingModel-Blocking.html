@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Browser Threading Model (Blocking)</title>
+	<script>
+	(function(){
+		window.addEventListener("DOMContentLoaded",init);
+		function init(){
+			document.getElementById("btnDoWork").addEventListener("click",onBtnDoWorkClick);
+		}
+		function onBtnDoWorkClick(){
+			displayMessage("Work Started...");
+			/*setTimeout(function(){
+				doWork();
+				displayMessage("Work Completed...");
+			});*/
+			doWork(function(percentCompleted){
+				//document.getElementById("progress").value = percentCompleted;
+				throw new Error("Intentional error");
+			},function(){
+				displayMessage("Work Completed");
+			});			
+		}
+		function doWork(onProgressCallback, onCompleteCallback){
+			var maxIterCount = 1000;
+			var currIterCount = 0;
+			function oneIteration(){
+				for(var i=0;i<100000 / maxIterCount;i++)
+					for(var j=0;j<1000;j++)
+						for(var k=0;k<100;k++){}
+				if (++currIterCount <= maxIterCount){
+					if (typeof onProgressCallback === "function"){
+						onProgressCallback((currIterCount / maxIterCount) * 100);
+					}
+					setTimeout(oneIteration);
+				} else {
+					if (typeof onCompleteCallback === "function"){
+						onCompleteCallback();
+					}
+				}
+			}
+			oneIteration();
+		}
+		function displayMessage(msg){
+			document.getElementById("divMessage").innerHTML += msg + "<br/>";
+		}
+	})();
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="">
+	<input type="button" value="Do Work" id="btnDoWork">
+	<div id="divMessage"></div>
+	<br>
+	<progress id="progress" max="100" min="0" value="0"></progress>
+</body>
+</html>
