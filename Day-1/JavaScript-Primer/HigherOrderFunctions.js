@@ -48,3 +48,43 @@ function groupBy(list,selector){
 	}
 	return result;
 }
+
+function join(leftList, rightList, leftKeySelector, rightKeySelector, transform){
+	var result = [];
+	for(var i=0;i<lisftList.length;i++)
+		for(var j=0;j<rightList.length;j++){
+			var leftKey = leftKeySelector(leftList[i]);
+			var rightKey = rightKeySelector(rightList[j]);
+			if (leftKey === rightKey){
+				result.push(transform(leftList[i],rightList[j]))
+			}
+		}
+	return result;
+}
+
+function join(leftList, rightList, leftKeySelector, rightKeySelector, transform){
+	var result = [];
+	for(var i=0;i<leftList.length;i++)
+		for(var j=0;j<rightList.length;j++){
+			var leftKey = leftKeySelector(leftList[i]);
+			var rightKey = rightKeySelector(rightList[j]);
+			if (leftKey === rightKey){
+				result.push(transform(leftList[i],rightList[j]))
+			}
+		}
+	return result;
+}
+
+join
+any
+all
+
+sum
+min
+max
+average
+count
+
+aggregate
+
+transform
