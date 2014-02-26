@@ -1,0 +1,16 @@
+{
+  "name": "FirstApp",
+  "version": "0.1.0",
+  "description": "Very first node app for demo ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "demo",
+    "training"
+  ],
+  "author": "Magesh K",
+  "license": "BSD-2-Clause"
+}

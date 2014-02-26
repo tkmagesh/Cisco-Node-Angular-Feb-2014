@@ -31,7 +31,10 @@
 						for(var k=0;k<100;k++){}
 				if (++currIterCount <= maxIterCount){
 					if (typeof onProgressCallback === "function"){
-						onProgressCallback((currIterCount / maxIterCount) * 100);
+						setTimeout(function(){
+							onProgressCallback((currIterCount / maxIterCount) * 100);	
+						});
+						
 					}
 					setTimeout(oneIteration);
 				} else {
