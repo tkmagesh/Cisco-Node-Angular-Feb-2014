@@ -3,14 +3,31 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Task Manager</title>
+	<style>
+	.completed {
+		color : red;
+		text-decoration: line-through;
+		font-style: italic;
+	}
+	</style>
 	<script src="angular.min.js"></script>
 	<script>
 	function TaskController($scope){
 		$scope.Tasks = {
-			list : ['jQuery','Explore Bangalore'],
+			list : [],
 			currentTask : '',
 			add : function(){
-				this.list.push(this.currentTask);
+				var newTask = {
+					name : this.currentTask, 
+					isCompleted : false, 
+					toggle : function(){ this.isCompleted = !this.isCompleted}
+				};
+				this.list.push(newTask);
+			},
+			removeCompleted : function(){
+				for(var i=this.list.length-1;i>=0;i--)
+					if (this.list[i].isCompleted)
+						this.list.splice(i,1);
 			}
 		}
 	}
@@ -23,8 +40,9 @@
 		<span>Task :</span>
 		<input type="text" ng-model="Tasks.currentTask">
 		<input type="button" value="Add Task" ng-click="Tasks.add()">
+		<input type="button" value="Remove Completed" ng-click="Tasks.removeCompleted()">
 		<ul>
-			<li ng-repeat="task in Tasks.list">{{task}}</li>
+			<li ng-repeat="task in Tasks.list" ng-click="task.toggle()" ng-class="{completed : task.isCompleted}">{{task.name}}</li>
 		</ul>	
 	</div>
 	
