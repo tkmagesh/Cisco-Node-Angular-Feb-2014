@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task Manager</title>
+	<script src="angular.min.js"></script>
+	<script>
+	function TaskController($scope){
+		$scope.Tasks = {
+			list : ['jQuery','Explore Bangalore'],
+			currentTask : '',
+			add : function(){
+				this.list.push(this.currentTask);
+			}
+		}
+	}
+	</script>
+</head>
+<body ng-app>
+	<div data-ng-controller="TaskController">
+		<h1>Task Manager</h1>
+		<hr>
+		<span>Task :</span>
+		<input type="text" ng-model="Tasks.currentTask">
+		<input type="button" value="Add Task" ng-click="Tasks.add()">
+		<ul>
+			<li ng-repeat="task in Tasks.list">{{task}}</li>
+		</ul>	
+	</div>
+	
+</body>
+</html>
